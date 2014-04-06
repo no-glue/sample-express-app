@@ -28,7 +28,18 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', routes.tips.index);
+
+app.get('/tips', routes.tips.all);
+
+app.get('/tips/:id', routes.tips.tip);
+
+app.get('/tips/tag/:name', routes.tips.tag);
+
+app.get('/tips/name/:name', routes.tips.name);
+
+app.post('/tips', routes.tips.create);
+
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

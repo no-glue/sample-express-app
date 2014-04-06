@@ -20,7 +20,7 @@ var Tips = function() {
 
   root.index = function(req, res) {
     // show index view
-    res.render('index', {title: 'Find'});
+    res.render('index', {title: 'Tip'});
   };
 
   root.all = function(req, res) {
