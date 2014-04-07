@@ -25,6 +25,13 @@ var View = Backbone.View.extend({
     for(var key in settings) this[key] = settings[key];
 
     return this;
+  },
+  date: function(id) {
+    // gets document created date
+
+    var timestamp = id.toString().substring(0, 8);
+
+    return new Date(parseInt(timestamp, 16) * 1000);
   }
 });
 
@@ -54,7 +61,7 @@ var LatestTipTimeView = View.extend({
 
     var compiled = Handlebars.compile(template);
 
-    var html = compiled(this.model.attributes);
+    var html = compiled({date: this.date(this.model.attributes._id)});
 
     this.$el.html(html);
 
@@ -85,7 +92,7 @@ var LatestTipView = View.extend({
     // show latest tip on home page
 
     var latestTipContentView = new LatestTipContentView();
-    
+
     this.$el.append(latestTipContentView.set({model: this.model}).render().el);
 
     var latestTipTimeView = new LatestTipTimeView();
