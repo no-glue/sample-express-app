@@ -37,6 +37,7 @@ var View = Backbone.View.extend({
 
 var LatestTipContentView = View.extend({
   tagName: 'div',
+  className: 'line',
   render: function() {
     // shows latest tip for home page
 
@@ -54,6 +55,7 @@ var LatestTipContentView = View.extend({
 
 var LatestTipTimeView = View.extend({
   tagName: 'div',
+  className: 'line',
   render: function() {
     // shows latest tip time created for home page
 
@@ -71,6 +73,7 @@ var LatestTipTimeView = View.extend({
 
 var LatestTipTagView = View.extend({
   tagName: 'div',
+  className: 'line',
   render: function() {
     // shows latest tip time created for home page
 

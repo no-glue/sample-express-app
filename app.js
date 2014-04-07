@@ -8,6 +8,13 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var stylus = require('stylus');
+var nib = require('nib');
+var compile = function(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .use(nib())
+}
 
 var app = express();
 
@@ -17,6 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(stylus.middleware({src: __dirname + '/public', compile: compile}));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
