@@ -33,9 +33,9 @@ var LatestTipContentView = View.extend({
   render: function() {
     // shows latest tip for home page
 
-    var template = $('#latest-tip-content-template').html();
+    var template = $('#latestTipContentTemplate').html();
 
-    var compiled = Handlebars.compile(template)
+    var compiled = Handlebars.compile(template);
 
     var html = compiled(this.model.attributes);
 
@@ -50,9 +50,9 @@ var LatestTipTimeView = View.extend({
   render: function() {
     // shows latest tip time created for home page
 
-    var template = $('#latest-tip-time-template').html();
+    var template = $('#latestTipTimeTemplate').html();
 
-    var compiled = Handlebars.compile(template)
+    var compiled = Handlebars.compile(template);
 
     var html = compiled(this.model.attributes);
 
@@ -67,9 +67,9 @@ var LatestTipTagView = View.extend({
   render: function() {
     // shows latest tip time created for home page
 
-    var template = $('#latest-tip-tag-template').html();
+    var template = $('#latestTipTagTemplate').html();
 
-    var compiled = Handlebars.compile(template)
+    var compiled = Handlebars.compile(template);
 
     var html = compiled(this.model.attributes);
 
@@ -79,8 +79,35 @@ var LatestTipTagView = View.extend({
   }
 });
 
+var LatestTipView = View.extend({
+  tagName: 'div',
+  render: function() {
+    // show latest tip on home page
+
+    var latestTipContentView = new LatestTipContentView();
+    
+    this.$el.append(latestTipContentView.set({model: this.model}).render().el);
+
+    var latestTipTimeView = new LatestTipTimeView();
+
+    this.$el.append(latestTipTimeView.set({model: this.model}).render().el);
+
+    var latestTipTagView = new LatestTipTagView();
+
+    this.$el.append(latestTipTagView.set({model: this.model}).render().el);
+
+    return this;
+  }
+});
+
 var TipsController = function() {
   var root = this;
+
+  root.initialize = function() {
+    // initialize things
+
+    return root;
+  };
 
   root.set = function(settings) {
     // set whatever
@@ -96,6 +123,40 @@ var TipsController = function() {
 
     return root[key];
   };
+
+  root.fetch = function() {
+    // fetches collection
+
+    var deferred = root.assure();
+
+    root.get('collection').fetch({reset: true, success: function(model, response) {
+      deferred.resolve(model.lenght);
+    }});
+
+    return deferred;
+  };
+
+  root.latestTip = function() {
+    // shows latest tip
+
+    var model = root.get('collection').shift();
+
+    if(model) {
+      root.get('selector')(root.get('element')).html(root.get('latestTipView').render().el);
+
+      root.get('collection').unshift(model);
+    } else {
+      var deferred = root.fetch();
+
+      deferred.then(function(arg) {
+        model = root.get('collection').shift();
+
+        root.get('selector')(root.get('element')).html(root.get('latestTipView').set({model: model}).render().el);
+
+        root.get('collection').unshift(model);
+      });
+    }
+  }
 };
 
 var tipsControllerOptions = function(options) {
@@ -104,6 +165,7 @@ var tipsControllerOptions = function(options) {
   if(!options) {
     options = {
       collection: new TipsCollection(),
+      latestTipView: new LatestTipView(),
       element: '#app'
     };
   }
@@ -132,6 +194,6 @@ var Router = Backbone.Router.extend({
     '': 'latestTip'
   },
   latestTip: function() {
-    console.log('latestTip>>>');
+    this.controllers[this.urls.indexRoute].latestTip();
   }
 });

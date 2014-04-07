@@ -5,5 +5,11 @@ block content
 
   div#app
 
-  script(id="atemplate", type="text/x-handlebars")
-    template
+  script(id="latestTipContentTemplate", type="text/x-handlebars")
+    {{content}}
+
+  script(id="latestTipTimeTemplate", type="text/x-handlebars")
+    {{_id}}
+
+  script(id="latestTipTagTemplate", type="text/x-handlebars")
+    {{tag}}
