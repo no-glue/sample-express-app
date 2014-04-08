@@ -94,7 +94,75 @@ var LatestTipTagView = View.extend({
   }
 });
 
+var TagNameView = View.extend({
+  tagName: 'li',
+  render: function() {
+    // show single tag name
+
+    var template = $('#tagNameTemplate').html();
+
+    var compiled = Handlebars.compile(template);
+
+    var html = compiled(this.model);
+
+    this.$el.html(html);
+
+    return this;    
+  }
+});
+
+var TagNamesView = View.extend({
+  tagName: 'ul',
+  render: function() {
+    // show tag names for home page
+
+    _.each(this.models, function(model) {
+      tagNameView = new TagNameView();
+
+      this.$el.append(tagNameView.set({model: model}).render().el);
+    }, this);
+
+    return this;
+  }
+});
+
 var LatestTipView = View.extend({
+  tagName: 'div',
+  className: 'centre',
+  render: function() {
+    // show latest tip on home page
+
+    this.clear();
+
+    var model = this.collection.shift();
+
+    var latestTipContentView = new LatestTipContentView();
+
+    this.$el.append(latestTipContentView.set({model: model}).render().el);
+
+    var latestTipTimeView = new LatestTipTimeView();
+
+    this.$el.append(latestTipTimeView.set({model: model}).render().el);
+
+    var latestTipTagView = new LatestTipTagView();
+
+    this.$el.append(latestTipTagView.set({model: model}).render().el);
+
+    this.collection.unshift(model);
+
+    var tagNamesView = new TagNamesView();
+
+    var models = _.uniq(this.collection.toJSON(), function(model) {
+      return model.tag;
+    });
+
+    this.$el.append(tagNamesView.set({models: models}).render().el);
+
+    return this;
+  }
+});
+
+var TipView = View.extend({
   tagName: 'div',
   className: 'centre',
   render: function() {
@@ -125,11 +193,11 @@ var TagTipsView = View.extend({
     // show tips tagged with a tag
 
     this.clear();
-    
-    for(var i = 0, len = this.models.length; i < len; i++) {
-      var latestTipView = new LatestTipView();
 
-      this.$el.append(latestTipView.set({model: this.models[i]}).render().el);
+    for(var i = 0, len = this.models.length; i < len; i++) {
+      var tipView = new TipView();
+
+      this.$el.append(tipView.set({model: this.models[i]}).render().el);
     }
 
     return this;
@@ -176,23 +244,11 @@ var TipsController = function() {
     // shows latest tip
     // todo fetch only latest tip
 
-    var model = root.get('collection').shift();
+    var deferred = root.fetch();
 
-    if(model) {
-      root.get('selector')(root.get('element')).html(root.get('latestTipView').render().el);
-
-      root.get('collection').unshift(model);
-    } else {
-      var deferred = root.fetch();
-
-      deferred.then(function(arg) {
-        model = root.get('collection').shift();
-
-        root.get('selector')(root.get('element')).html(root.get('latestTipView').set({model: model}).render().el);
-
-        root.get('collection').unshift(model);
-      });
-    }
+    deferred.then(function(arg) {
+      root.get('selector')(root.get('element')).html(root.get('latestTipView').set({collection: root.get('collection')}).render().el);
+    });
   }
 
   root.tag = function(tag) {
