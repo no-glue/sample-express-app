@@ -91,6 +91,7 @@ var LatestTipTagView = View.extend({
 
 var LatestTipView = View.extend({
   tagName: 'div',
+  className: 'centre',
   render: function() {
     // show latest tip on home page
 
