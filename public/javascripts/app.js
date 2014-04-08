@@ -41,9 +41,17 @@ var View = Backbone.View.extend({
   unique: function(collection, field) {
     // gets unique models
 
-    return _.uniq(collection.toJSON(), function(model) {
-      return model[field];
-    });
+    var models = collection.toJSON();
+
+    var model = models.shift();
+
+    if(!model) return [];
+
+    var property = _.property(field);
+
+    models.unshift(model);
+
+    return _.uniq(models, property);
   }
 });
 
