@@ -111,6 +111,18 @@ var LatestTipView = View.extend({
   }
 });
 
+var TagTipsView = View.extend({
+  tagName: 'div',
+  className: 'centre',
+  render: function() {
+    // show tips tagged with a tag
+
+    this.$el.html('tips with a tag');
+
+    return this;
+  }
+})
+
 var TipsController = function() {
   var root = this;
 
@@ -149,6 +161,7 @@ var TipsController = function() {
 
   root.latestTip = function() {
     // shows latest tip
+    // todo fetch only latest tip
 
     var model = root.get('collection').shift();
 
@@ -168,6 +181,25 @@ var TipsController = function() {
       });
     }
   }
+
+  root.tag = function(tag) {
+    // gets tips tagged with tag
+    // todo fetch only tips with tag
+
+    var models = root.get('collection').where({tag: tag});
+
+    if(models && models.length) {
+      root.get('selector')(root.get('element')).html(root.get('tagTipsView').set({models: models}).render().el);
+    } else {
+      var deferred = root.fetch();
+
+      deferred.then(function(arg) {
+        var models = root.get('collection').where({tag: tag});
+
+        root.get('selector')(root.get('element')).html(root.get('tagTipsView').set({models: models}).render().el);
+      }); 
+    }
+  }
 };
 
 var tipsControllerOptions = function(options) {
@@ -177,6 +209,7 @@ var tipsControllerOptions = function(options) {
     options = {
       collection: new TipsCollection(),
       latestTipView: new LatestTipView(),
+      tagTipsView: new TagTipsView(),
       element: '#app'
     };
   }
@@ -202,9 +235,13 @@ var Router = Backbone.Router.extend({
     _.extend(this, options);
   },
   routes: {
-    '': 'latestTip'
+    '': 'latestTip',
+    'tags/:tag': 'tag'
   },
   latestTip: function() {
     this.controllers[this.urls.indexRoute].latestTip();
+  },
+  tag: function(tag) {
+    this.controllers[this.urls.tagRoute].tag(tag);
   }
 });

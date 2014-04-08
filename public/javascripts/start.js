@@ -4,7 +4,8 @@
   Backbone.history.start();
 })({
   urls: {
-    indexRoute: 'tipsController'
+    indexRoute: 'tipsController',
+    tagRoute: 'tipsController'
   },
   controllers: {
     tipsController: new TipsController()
