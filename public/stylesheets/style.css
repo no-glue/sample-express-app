@@ -1,3 +1,11 @@
 .line {
-  margin-bottom: 16px;
+  margin-top: 64px;
+  text-align: left;
+}
+.centre {
+  display: inline-block;
+  width: 960px;
+}
+#app {
+  text-align: center;
 }

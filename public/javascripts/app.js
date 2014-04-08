@@ -117,11 +117,15 @@ var TagTipsView = View.extend({
   render: function() {
     // show tips tagged with a tag
 
-    this.$el.html('tips with a tag');
+    for(var i = 0, len = this.models.length; i < len; i++) {
+      var latestTipView = new LatestTipView();
+
+      this.$el.append(latestTipView.set({model: this.models[i]}).render().el);
+    }
 
     return this;
   }
-})
+});
 
 var TipsController = function() {
   var root = this;
