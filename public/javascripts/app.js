@@ -32,6 +32,11 @@ var View = Backbone.View.extend({
     var timestamp = id.toString().substring(0, 8);
 
     return new Date(parseInt(timestamp, 16) * 1000);
+  },
+  clear: function() {
+    // clears view
+
+    this.$el.html('');
   }
 });
 
@@ -95,6 +100,8 @@ var LatestTipView = View.extend({
   render: function() {
     // show latest tip on home page
 
+    this.clear();
+
     var latestTipContentView = new LatestTipContentView();
 
     this.$el.append(latestTipContentView.set({model: this.model}).render().el);
@@ -117,6 +124,8 @@ var TagTipsView = View.extend({
   render: function() {
     // show tips tagged with a tag
 
+    this.clear();
+    
     for(var i = 0, len = this.models.length; i < len; i++) {
       var latestTipView = new LatestTipView();
 
