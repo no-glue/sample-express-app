@@ -37,6 +37,13 @@ var View = Backbone.View.extend({
     // clears view
 
     this.$el.html('');
+  },
+  unique: function(collection, field) {
+    // gets unique models
+
+    return _.uniq(collection.toJSON(), function(model) {
+      return model[field];
+    });
   }
 });
 
@@ -152,9 +159,7 @@ var LatestTipView = View.extend({
 
     var tagNamesView = new TagNamesView();
 
-    var models = _.uniq(this.collection.toJSON(), function(model) {
-      return model.tag;
-    });
+    var models = this.unique(this.collection, 'tag');
 
     this.$el.append(tagNamesView.set({models: models}).render().el);
 
