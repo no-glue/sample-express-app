@@ -6,15 +6,7 @@ var TipsCollection = Backbone.Collection.extend({
   model: Tip,
   url: '/tips',
   reset: function(models, options) {
-    // resets collection
-
-    var newModels = [];
-
-    _.each(models, function(model) {
-      if(_.isUndefined(this.get(model._id))) newModels.push(model);
-    }, this);
-
-    return Backbone.Collection.prototype.reset.call(this, newModels, options);
+    return Backbone.Collection.prototype.reset.call(this, models, options);
   }
 });
 
@@ -109,7 +101,7 @@ var TagNameView = View.extend({
   render: function() {
     // show single tag name
 
-    var template = $('#tagNameTemplate').html();
+    var template = $('#latestTipTagTemplate').html();
 
     var compiled = Handlebars.compile(template);
 
@@ -145,6 +137,7 @@ var LatestTipView = View.extend({
     this.clear();
 
     var model = this.collection.shift();
+    console.log('latestTipView1>>>', model, this.collection);
 
     var latestTipContentView = new LatestTipContentView();
 
@@ -163,8 +156,10 @@ var LatestTipView = View.extend({
     var tagNamesView = new TagNamesView();
 
     var models = this.unique(this.collection, 'tag');
+    console.log('latestTipView10>>>', models);
 
     this.$el.append(tagNamesView.set({models: models}).render().el);
+    console.log('latestTipView!>>>');
 
     return this;
   }
@@ -255,6 +250,7 @@ var TipsController = function() {
     var deferred = root.fetch();
 
     deferred.then(function(arg) {
+      console.log('latestTip>>>');
       root.get('selector')(root.get('element')).html(root.get('latestTipView').set({collection: root.get('collection')}).render().el);
     });
   }

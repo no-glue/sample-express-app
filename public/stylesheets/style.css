@@ -9,3 +9,8 @@
 #app {
   text-align: center;
 }
+.lineList {
+  list-style-type: none;
+  display: inline;
+  margin-left: 16px;
+}
