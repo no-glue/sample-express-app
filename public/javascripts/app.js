@@ -43,13 +43,7 @@ var View = Backbone.View.extend({
 
     var models = collection.toJSON();
 
-    var model = models.shift();
-
-    if(!model) return [];
-
     var property = _.property(field);
-
-    models.unshift(model);
 
     return _.uniq(models, property);
   }
@@ -111,6 +105,7 @@ var LatestTipTagView = View.extend({
 
 var TagNameView = View.extend({
   tagName: 'li',
+  className: 'lineList',
   render: function() {
     // show single tag name
 
