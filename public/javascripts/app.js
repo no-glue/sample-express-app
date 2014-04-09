@@ -128,6 +128,18 @@ var TagNamesView = View.extend({
   }
 });
 
+var TagCreateLinkView = View.extend({
+  tagName: 'div',
+  className: 'centre',
+  render: function() {
+    // show create tag link
+
+    this.$el.html($('#tagCreateLinkTemplate').html());
+
+    return this; 
+  }
+});
+
 var LatestTipView = View.extend({
   tagName: 'div',
   className: 'centre',
@@ -157,6 +169,10 @@ var LatestTipView = View.extend({
     var models = this.unique(this.collection, 'tag');
 
     this.$el.append(tagNamesView.set({models: models}).render().el);
+
+    var tagCreateLinkView = new TagCreateLinkView();
+
+    this.$el.append(tagCreateLinkView.render().el);
 
     return this;
   }
@@ -249,7 +265,11 @@ var TipsController = function() {
     deferred.then(function(arg) {
       root.get('selector')(root.get('element')).html(root.get('latestTipView').set({collection: root.get('collection')}).render().el);
     });
-  }
+  };
+
+  root.create = function() {
+    // shows page to create tip
+  };
 
   root.tag = function(tag) {
     // gets tips tagged with tag
@@ -305,10 +325,14 @@ var Router = Backbone.Router.extend({
   },
   routes: {
     '': 'latestTip',
+    'tags/create': 'create',
     'tags/:tag': 'tag'
   },
   latestTip: function() {
     this.controllers[this.urls.indexRoute].latestTip();
+  },
+  create: function() {
+    this.controllers[this.urls.createRoute].create();
   },
   tag: function(tag) {
     this.controllers[this.urls.tagRoute].tag(tag);

@@ -5,6 +5,7 @@
 })({
   urls: {
     indexRoute: 'tipsController',
+    createRoute: 'tipsController',
     tagRoute: 'tipsController'
   },
   controllers: {
