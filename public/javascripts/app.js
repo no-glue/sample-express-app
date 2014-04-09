@@ -137,7 +137,6 @@ var LatestTipView = View.extend({
     this.clear();
 
     var model = this.collection.shift();
-    console.log('latestTipView1>>>', model, this.collection);
 
     var latestTipContentView = new LatestTipContentView();
 
@@ -156,10 +155,8 @@ var LatestTipView = View.extend({
     var tagNamesView = new TagNamesView();
 
     var models = this.unique(this.collection, 'tag');
-    console.log('latestTipView10>>>', models);
 
     this.$el.append(tagNamesView.set({models: models}).render().el);
-    console.log('latestTipView!>>>');
 
     return this;
   }
@@ -250,7 +247,6 @@ var TipsController = function() {
     var deferred = root.fetch();
 
     deferred.then(function(arg) {
-      console.log('latestTip>>>');
       root.get('selector')(root.get('element')).html(root.get('latestTipView').set({collection: root.get('collection')}).render().el);
     });
   }
