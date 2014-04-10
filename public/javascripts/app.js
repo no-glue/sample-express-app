@@ -163,9 +163,9 @@ var TagCreateFormView = View.extend({
     // show tag create form
 
     this.clear();
-
+console.log('form1>>>', $('#tagCreateFormTemplate').html());
     this.$el.html($('#tagCreateFormTemplate').html());
-
+console.log('form2>>>', this.$el.html());
     return this;
   },
   submit: function(e) {

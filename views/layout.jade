@@ -3,6 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
     script(src='/javascripts/lib/underscore.js', type='text/javascript')
     script(src='/javascripts/lib/zepto.js', type='text/javascript')
     script(src='/javascripts/lib/assure.js', type='text/javascript')
@@ -10,5 +12,3 @@ html
     script(src='/javascripts/lib/handlebars.js', type='text/javascript')
     script(src='/javascripts/app.js', type='text/javascript')
     script(src='/javascripts/start.js', type='text/javascript')
-  body
-    block content
