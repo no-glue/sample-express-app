@@ -38,6 +38,19 @@ var View = Backbone.View.extend({
     var property = _.property(field);
 
     return _.uniq(models, property);
+  },
+  formJson: function(arr) {
+    // turns array of objects to object
+
+    var res = {};
+
+    for(var i = 0, len = arr.length; i < len; i++) {
+      var item = arr[i];
+
+      res[item.name] = item.value;
+    }
+
+    return res;
   }
 });
 
@@ -160,7 +173,7 @@ var TagCreateFormView = View.extend({
 
     e.preventDefault();
 
-    console.log('submit>>>');
+    console.log('submit>>>', this.formJson(this.$el.serializeArray()));
   }
 });
 
