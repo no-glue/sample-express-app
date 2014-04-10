@@ -143,8 +143,9 @@ var TagCreateLinkView = View.extend({
 });
 
 var TagCreateFormView = View.extend({
-  tagName: 'div',
+  tagName: 'form',
   className: 'centre',
+  events: {'submit': 'submit'},
   render: function() {
     // show tag create form
 
@@ -153,6 +154,13 @@ var TagCreateFormView = View.extend({
     this.$el.html($('#tagCreateFormTemplate').html());
 
     return this;
+  },
+  submit: function(e) {
+    // submit form for creating tag
+
+    e.preventDefault();
+
+    console.log('submit>>>');
   }
 });
 
