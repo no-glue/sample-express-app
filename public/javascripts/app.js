@@ -134,9 +134,25 @@ var TagCreateLinkView = View.extend({
   render: function() {
     // show create tag link
 
+    this.clear();
+
     this.$el.html($('#tagCreateLinkTemplate').html());
 
     return this; 
+  }
+});
+
+var TagCreateFormView = View.extend({
+  tagName: 'div',
+  className: 'centre',
+  render: function() {
+    // show tag create form
+
+    this.clear();
+
+    this.$el.html($('#tagCreateFormTemplate').html());
+
+    return this;
   }
 });
 
@@ -269,6 +285,8 @@ var TipsController = function() {
 
   root.create = function() {
     // shows page to create tip
+
+    root.get('selector')(root.get('element')).html(root.get('tagCreateFormView').render().el);
   };
 
   root.tag = function(tag) {
@@ -299,6 +317,7 @@ var tipsControllerOptions = function(options) {
       collection: new TipsCollection(),
       latestTipView: new LatestTipView(),
       tagTipsView: new TagTipsView(),
+      tagCreateFormView: new TagCreateFormView(),
       element: '#app'
     };
   }
