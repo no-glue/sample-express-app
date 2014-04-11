@@ -86,8 +86,6 @@ var View = Backbone.View.extend({
     if(!panel) panel = controlPanel;
 
     panel.getEvents().trigger(event, params);
-
-    console.log('trigger>>>', event, params);
   }
 });
 
@@ -345,7 +343,12 @@ var TipsController = function() {
   root.created = function(event) {
     // created tip
 
-    console.log('created>>>', event);
+    root.get('collection').create(event, {
+      wait: true,
+      success: function(response) {
+        root.navigate('home');
+      }
+    });
   };
 
   root.latestTip = function() {
@@ -411,7 +414,26 @@ var options = function(options) {
   if(!options) {
     options = {
       assure: assure,
-      selector: $
+      selector: $,
+      navigate: function(url, params, sep, refresh, navigator) {
+        // navigate to url
+
+        if(!sep) sep = '/';
+
+        if(params && params.length) {
+          url = url + sep;
+
+          for(var i = 0, len = params.length; i < len; i++) url += params[i] + sep;
+
+          url = url.substring(0, url.length - 1);
+        }
+
+        if(!refresh) refresh = true;
+
+        if(!navigator) navigator = Backbone.history;
+
+        navigator.navigate(url, refresh);
+      } 
     }
   }
 
@@ -424,6 +446,7 @@ var Router = Backbone.Router.extend({
   },
   routes: {
     '': 'latestTip',
+    'home': 'latestTip',
     'tags/create': 'create',
     'tags/:tag': 'tag'
   },
