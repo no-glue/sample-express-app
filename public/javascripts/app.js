@@ -10,6 +10,32 @@ var TipsCollection = Backbone.Collection.extend({
   }
 });
 
+var controlPanel = (function() {
+  var ControlPanel = function() {
+    var root = this;
+
+    root.setEvents = function(callback, events) {
+      // sets events
+
+      if(!callback) callback = _.extend;
+
+      if(!events) events = Backbone.Events;
+
+      if(typeof root.events === 'undefined') root.events = callback({}, events);
+
+      return root;
+    };
+
+    root.getEvents = function() {
+      // gets events
+
+      return root.events;
+    };
+  }
+
+  return new ControlPanel();
+})();
+
 var View = Backbone.View.extend({
   set: function(settings) {
     // set whatever
@@ -51,6 +77,15 @@ var View = Backbone.View.extend({
     }
 
     return res;
+  },
+  trigger: function(event, params, panel) {
+    // triggers event
+
+    if(!panel) panel = controlPanel;
+
+    panel.setEvents().getEvents().trigger(event, params);
+
+    console.log('trigger>>>', event, params);
   }
 });
 
@@ -173,7 +208,7 @@ var TagCreateFormView = View.extend({
 
     e.preventDefault();
 
-    console.log('submit>>>', this.formJson(this.$el.serializeArray()));
+    this.trigger('tag:create', this.formJson(this.$el.serializeArray()));
   }
 });
 
@@ -263,6 +298,8 @@ var TipsController = function() {
   root.initialize = function() {
     // initialize things
 
+    root.react('tag:create', root.created);
+
     return root;
   };
 
@@ -291,6 +328,22 @@ var TipsController = function() {
     }});
 
     return deferred;
+  };
+
+  root.react = function(event, handler, object, panel) {
+    // react on event
+
+    if(!object) object = root.get('root');
+
+    if(!panel) panel = controlPanel;
+
+    panel.setEvents().getEvents().bind(event, handler, object);
+  };
+
+  root.created = function(event) {
+    // created tip
+
+    console.log('created>>>', event);
   };
 
   root.latestTip = function() {
