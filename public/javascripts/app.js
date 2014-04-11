@@ -21,13 +21,15 @@ var controlPanel = (function() {
 
       if(!events) events = Backbone.Events;
 
-      if(typeof root.events === 'undefined') root.events = callback({}, events);
+      root.events = callback({}, events);
 
       return root;
     };
 
     root.getEvents = function() {
       // gets events
+
+      if(typeof root.events === 'undefined') root.setEvents();
 
       return root.events;
     };
@@ -83,7 +85,7 @@ var View = Backbone.View.extend({
 
     if(!panel) panel = controlPanel;
 
-    panel.setEvents().getEvents().trigger(event, params);
+    panel.getEvents().trigger(event, params);
 
     console.log('trigger>>>', event, params);
   }
@@ -337,7 +339,7 @@ var TipsController = function() {
 
     if(!panel) panel = controlPanel;
 
-    panel.setEvents().getEvents().bind(event, handler, object);
+    panel.getEvents().bind(event, handler, object);
   };
 
   root.created = function(event) {
