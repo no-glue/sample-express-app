@@ -163,6 +163,7 @@ var TagNameView = View.extend({
 
 var TagNamesView = View.extend({
   tagName: 'ul',
+  className: 'margin-top-64px',
   render: function() {
     // show tag names for home page
 
@@ -178,7 +179,7 @@ var TagNamesView = View.extend({
 
 var TagCreateLinkView = View.extend({
   tagName: 'div',
-  className: 'centre',
+  className: 'centre margin-top-64px',
   render: function() {
     // show create tag link
 
