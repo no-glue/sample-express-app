@@ -1,6 +1,6 @@
 var LatestTipTagView = View.extend({
-  tagName: 'div',
-  className: 'line margin-top-64px',
+  tagName: 'span',
+  className: 'stripButton',
   render: function() {
     // shows latest tip time created for home page
 

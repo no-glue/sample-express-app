@@ -10,10 +10,13 @@ block content
     {{date}}
 
   script(id="latestTipTagTemplate", type="text/x-handlebars")
-    <a href="#tags/{{tag}}">{{tag}}</a>
+    <a href="#tags/{{tag}}" class="tagButton">{{tag}}</a>
+
+  script(id="latestTipReportTemplate", type="text/x-handlebars")
+    <a href="#tags/report" class="reportButton">report</a>
 
   script(id="tagCreateLinkTemplate", type="text/x-handlebars")
-    <a href="#tags/create">&#43;</a>
+    <a href="#tags/create" class="tagButton">&#43;</a>
 
   script(id="tagCreateFormTemplate", type="text/x-handlebars")
       <label class="line margin-top-16px label">Content</label>
