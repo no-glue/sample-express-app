@@ -100,6 +100,16 @@ var View = Backbone.View.extend({
     // sorts models by cid reverse
 
     return this.sortCid(models, -1);
+  },
+  markdown: function(str) {
+    // parse markdown to html
+
+    return markdown.parse(str);
+  },
+  replace: function(str, other) {
+    // replace string with other
+
+    return str.replace(/{{(.*?)}}/, other);
   }
 });
 
@@ -111,11 +121,7 @@ var LatestTipContentView = View.extend({
 
     var template = $('#latestTipContentTemplate').html();
 
-    var compiled = Handlebars.compile(template);
-
-    var html = compiled(this.model.attributes);
-
-    this.$el.html(html);
+    this.$el.html(this.replace(template, this.markdown(this.model.attributes.content)));
 
     return this;
   }
