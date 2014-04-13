@@ -6,6 +6,8 @@ var TipsController = function() {
 
     root.react('tag:create', root.created);
 
+    root.react('tip:report', root.reported);
+
     return root;
   };
 
@@ -55,6 +57,12 @@ var TipsController = function() {
         root.navigate('home');
       }
     });
+  };
+
+  root.reported = function(event) {
+    // tip reported
+
+    console.log('reported>>>', event);
   };
 
   root.latestTip = function() {
