@@ -6,7 +6,11 @@ var LatestTipReportView = View.extend({
 
     var template = $('#latestTipReportTemplate').html();
 
-    this.$el.html(template);
+    var compiled = Handlebars.compile(template);
+
+    var html = compiled(this.model.attributes);
+
+    this.$el.html(html);
 
     return this;
   }

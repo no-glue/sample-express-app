@@ -14,9 +14,9 @@ var TipView = View.extend({
 
     this.$el.append(latestTipTimeView.set({model: this.model}).render().el);
 
-    var latestTipTagView = new LatestTipTagView();
+    var latestTipButtonsView = new LatestTipButtonsView();
 
-    this.$el.append(latestTipTagView.set({model: this.model}).render().el);
+    this.$el.append(latestTipButtonsView.set({model: this.model}).render().el);
 
     return this;
   }
