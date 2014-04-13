@@ -86,6 +86,20 @@ var View = Backbone.View.extend({
     if(!panel) panel = controlPanel;
 
     panel.getEvents().trigger(event, params);
+  },
+  sortCid: function(models, direction) {
+    // sorts models by cid
+
+    if(!direction) direction = 1;
+
+    return _.sortBy(this.models, function(model) {
+      return direction * parseInt(model.cid.substring(1, model.cid.length));
+    });
+  },
+  sortCidReverse: function(models) {
+    // sorts models by cid reverse
+
+    return this.sortCid(models, -1);
   }
 });
 
@@ -283,10 +297,12 @@ var TagTipsView = View.extend({
 
     this.clear();
 
-    for(var i = 0, len = this.models.length; i < len; i++) {
+    var sorted = this.sortCidReverse(this.models);
+
+    for(var i = 0, len = sorted.length; i < len; i++) {
       var tipView = new TipView();
 
-      this.$el.append(tipView.set({model: this.models[i]}).render().el);
+      this.$el.append(tipView.set({model: sorted[i]}).render().el);
     }
 
     return this;
