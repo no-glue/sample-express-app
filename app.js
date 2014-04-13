@@ -48,6 +48,8 @@ app.get('/tips/name/:name', routes.tips.name);
 
 app.post('/tips', routes.tips.create);
 
+app.put('/tips', routes.tips.update);
+
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

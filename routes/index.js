@@ -73,6 +73,23 @@ var Tips = function() {
 
     res.json(req.body);
   }
+
+  root.update = function(req, res) {
+    // updates tip
+
+    var db = root.getDatabase();
+
+    var id = db.ObjectId(req.body._id);
+
+    delete req.body._id;
+
+    root.getDatabase().tips.update({_id: id}, {$set: req.body}, function(err, lastErrorObject) {
+    });
+
+    req.body._id = id;
+
+    res.json(req.body);
+  }
 };
 
 var tips = new Tips()
