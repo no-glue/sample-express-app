@@ -48,7 +48,6 @@ var TipsController = function() {
     model.save(params, {
       wait: true,
       success: function(model, response) {
-        console.log('success');
         deferred.resolve(model);
     }});
 
@@ -82,9 +81,7 @@ var TipsController = function() {
     var deferred = root.saveModel(event, {reported: true});
 
     deferred.then(function(arg) {
-      console.log('done>>>', root.get('collection'));
     });
-    console.log('reported>>>', event);
   };
 
   root.latestTip = function() {
