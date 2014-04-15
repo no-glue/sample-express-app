@@ -38,6 +38,23 @@ var TipsController = function() {
     return deferred;
   };
 
+  root.saveModel = function(id, params) {
+    // saves model
+
+    var model = root.get('collection').get(id);
+
+    var deferred = root.assure();
+
+    model.save(params, {
+      wait: true,
+      success: function(model, response) {
+        console.log('success');
+        deferred.resolve(model);
+    }});
+
+    return deferred;
+  };
+
   root.react = function(event, handler, object, panel) {
     // react on event
 
@@ -62,6 +79,11 @@ var TipsController = function() {
   root.reported = function(event) {
     // tip reported
 
+    var deferred = root.saveModel(event, {reported: true});
+
+    deferred.then(function(arg) {
+      console.log('done>>>', root.get('collection'));
+    });
     console.log('reported>>>', event);
   };
 
