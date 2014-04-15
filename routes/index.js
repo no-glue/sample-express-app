@@ -70,14 +70,8 @@ var Tips = function() {
   root.create = function(req, res) {
     // adds a tip
     root.getDatabase().tips.save(req.body, function(err, saved) {
-      if(err) {
-        res.json({});
-
-        return;
-      } else res.json(req.body);
+      res.json(req.body);
     });
-
-    res.json(req.body);
   }
 
   root.update = function(req, res) {
@@ -90,15 +84,9 @@ var Tips = function() {
     delete req.body._id;
 
     root.getDatabase().tips.update({_id: id}, {$set: req.body}, function(err, lastErrorObject) {
-      if(err) {
-        res.json({});
+      req.body._id = id;
 
-        return;
-      } else {
-        req.body._id = id;
-
-        res.json(req.body);        
-      }
+      res.json(req.body);        
     });
   }
 };
