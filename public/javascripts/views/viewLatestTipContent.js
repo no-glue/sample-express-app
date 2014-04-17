@@ -1,6 +1,6 @@
 var LatestTipContentView = View.extend({
   tagName: 'div',
-  className: 'line margin-top-64px',
+  className: 'line margin-top-64px code',
   render: function() {
     // shows latest tip for home page
 
