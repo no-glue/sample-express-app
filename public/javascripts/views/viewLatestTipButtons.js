@@ -12,6 +12,10 @@ var LatestTipButtonsView = View.extend({
 
     this.$el.append(latestTipReportView.set({model: this.model}).render().el);
 
+    var latestTipSearchView = new LatestTipSearchView();
+
+    this.$el.append(latestTipSearchView.set({model: this.model}).render().el);
+
     return this;
   }
 });
