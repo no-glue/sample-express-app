@@ -16,6 +16,6 @@ var TagCreateFormView = View.extend({
 
     e.preventDefault();
 
-    this.trigger('tag:create', this.formJson(this.$el.serializeArray()));
+    this.trigger('tag:create', this.composite(this.formJson(this.$el.serializeArray()), {text: {attributes: ['tag', 'content']}}));
   }
 });

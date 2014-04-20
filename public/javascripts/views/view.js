@@ -70,5 +70,24 @@ var View = Backbone.View.extend({
     // replace string with other
 
     return str.replace(/{{(.*?)}}/, other);
+  },
+  composite: function(model, fields) {
+    // adds composites to model
+
+    for(var key in fields) {
+      var field = fields[key];
+
+      var value = '';
+
+      for(var i = 0, length = field.attributes.length; i < length; i++) {
+        var attribute = field.attributes[i];
+
+        value += model[attribute];
+      }
+
+      model[key] = value;
+    }
+
+    return model;
   }
 });
