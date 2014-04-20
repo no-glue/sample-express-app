@@ -1,0 +1,6 @@
+  script(id="tagCreateFormTemplate", type="text/x-handlebars")
+      <label class="line margin-top-16px label">Content</label>
+      <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>
+      <label class="line margin-top-16px label">Tag</label>
+      <input name="tag" type="text" pattern="^[a-zA-Z0-9-]+$" required title="Only one tag allowed"class="line margin-top-16px tag rounded input"/>
+      <input type="submit" value="Create" class="line margin-top-16px rounded submit" />

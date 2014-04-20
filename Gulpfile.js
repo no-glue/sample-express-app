@@ -15,6 +15,9 @@ var paths = {
       './public/javascripts/router.js',
       './public/javascripts/start.js',
       '!./public/javacscripts/lib/*'
+    ],
+    templates: [
+      './views/templates/*.jade'
     ]
 };
 
@@ -27,4 +30,12 @@ gulp.task('scripts', function() {
     pipe(gulp.dest('./public/javascripts'));
 });
 
-gulp.task('default', ['scripts']);
+gulp.task('templates', function() {
+  // join templates
+
+  return gulp.src(paths.templates).
+  pipe(concat('index.jade')).
+  pipe(gulp.dest('./views'));
+});
+
+gulp.task('default', ['scripts', 'templates']);

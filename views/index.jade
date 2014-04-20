@@ -2,25 +2,19 @@ extends layout
 
 block content
   div#app
-
   script(id="latestTipContentTemplate", type="text/x-handlebars")
     {{content}}
-
-  script(id="latestTipTimeTemplate", type="text/x-handlebars")
-    {{date}}
-
-  script(id="latestTipTagTemplate", type="text/x-handlebars")
-    <a href="#tags/{{tag}}" class="tagButton">{{tag}}</a>
-
   script(id="latestTipReportTemplate", type="text/x-handlebars")
     <a href="#" class="reportButton">report</a>
-
-  script(id="tagCreateLinkTemplate", type="text/x-handlebars")
-    <a href="#tags/create" class="tagButton">&#43;</a>
-
+  script(id="latestTipTagTemplate", type="text/x-handlebars")
+    <a href="#tags/{{tag}}" class="tagButton">{{tag}}</a>
+  script(id="latestTipTimeTemplate", type="text/x-handlebars")
+    {{date}}
   script(id="tagCreateFormTemplate", type="text/x-handlebars")
       <label class="line margin-top-16px label">Content</label>
       <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>
       <label class="line margin-top-16px label">Tag</label>
       <input name="tag" type="text" pattern="^[a-zA-Z0-9-]+$" required title="Only one tag allowed"class="line margin-top-16px tag rounded input"/>
       <input type="submit" value="Create" class="line margin-top-16px rounded submit" />
+  script(id="tagCreateLinkTemplate", type="text/x-handlebars")
+    <a href="#tags/create" class="tagButton">&#43;</a>
