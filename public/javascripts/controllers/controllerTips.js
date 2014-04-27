@@ -105,6 +105,11 @@ var TipsController = function() {
     });
   };
 
+  root.search = function() {
+    // does search for a term in collection
+    console.log('search>>>');
+  };
+
   root.tag = function(tag) {
     // gets tips tagged with tag
     // todo fetch only tips with tag

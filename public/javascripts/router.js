@@ -6,6 +6,7 @@ var Router = Backbone.Router.extend({
     '': 'latestTip',
     'home': 'latestTip',
     'tags/create': 'create',
+    'tags/search': 'search',
     'tags/:tag': 'tag'
   },
   latestTip: function() {
@@ -13,6 +14,9 @@ var Router = Backbone.Router.extend({
   },
   create: function() {
     this.controllers[this.urls.createRoute].create();
+  },
+  search: function() {
+    this.controllers[this.urls.searchRoute].search();
   },
   tag: function(tag) {
     this.controllers[this.urls.tagRoute].tag(tag);
