@@ -8,6 +8,8 @@ var TipsController = function() {
 
     root.react('tip:report', root.reported);
 
+    root.react('text:search', root.searched);
+
     return root;
   };
 
@@ -82,6 +84,12 @@ var TipsController = function() {
 
     deferred.then(function(arg) {
     });
+  };
+
+  root.searched = function(event) {
+    // text searched
+
+    console.log('searched>>>', event);
   };
 
   root.latestTip = function() {
