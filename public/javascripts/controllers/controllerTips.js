@@ -40,6 +40,14 @@ var TipsController = function() {
     return deferred;
   };
 
+  root.getRegex = function(term) {
+    // gets regex
+  };
+
+  root.searchRegex = function(regex) {
+    // search reg ex
+  };
+
   root.saveModel = function(id, params) {
     // saves model
 
@@ -121,7 +129,6 @@ var TipsController = function() {
     deferred.then(function(arg) {
       root.get('selector')(root.get('element')).html(root.get('searchView').render().el);
     });
-    console.log('search>>>');
   };
 
   root.tag = function(tag) {
