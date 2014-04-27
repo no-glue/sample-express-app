@@ -107,6 +107,12 @@ var TipsController = function() {
 
   root.search = function() {
     // does search for a term in collection
+
+    var deferred = root.fetch();
+
+    deferred.then(function(arg) {
+      root.get('selector')(root.get('element')).html(root.get('searchView').render().el);
+    });
     console.log('search>>>');
   };
 

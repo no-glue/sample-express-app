@@ -7,6 +7,7 @@ var tipsControllerOptions = function(options) {
       latestTipView: new LatestTipView(),
       tagTipsView: new TagTipsView(),
       tagCreateFormView: new TagCreateFormView(),
+      searchView: new SearchView(),
       element: '#app'
     };
   }
