@@ -40,12 +40,18 @@ var TipsController = function() {
     return deferred;
   };
 
-  root.getRegex = function(term) {
-    // gets regex
-  };
+  root.filter = function(term, field) {
+    // searches for term
 
-  root.searchRegex = function(regex) {
-    // search reg ex
+    if(!field) field = 'text';
+
+    return root.get('collection').filter(function(model) {
+      var value = model.get(field);
+
+      if(typeof value === 'undefined') return false;
+
+      return value.toLowerCase().indexOf(term.toLowerCase()) !== -1;
+    });
   };
 
   root.saveModel = function(id, params) {
@@ -97,7 +103,7 @@ var TipsController = function() {
   root.searched = function(event) {
     // text searched
 
-    console.log('searched>>>', event);
+    console.log('searched>>>', root.filter(event.search));
   };
 
   root.latestTip = function() {

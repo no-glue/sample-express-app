@@ -8,7 +8,7 @@ var SearchView = View.extend({
 
     var template = $('#searchTemplate').html();
 
-    this.$el.append(template);
+    this.$el.html(template);
 
     return this;
   },
