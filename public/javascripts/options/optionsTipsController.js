@@ -7,8 +7,9 @@ var tipsControllerOptions = function(options) {
       latestTipView: new LatestTipView(),
       tagTipsView: new TagTipsView(),
       tagCreateFormView: new TagCreateFormView(),
-      searchFieldView: new SearchFieldView(),
-      element: '#app'
+      searchView: new SearchView(),
+      element: '#app',
+      elementSearchResults: '#searchResults'
     };
   }
 

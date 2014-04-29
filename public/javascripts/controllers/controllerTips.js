@@ -133,7 +133,7 @@ var TipsController = function() {
     var deferred = root.fetch();
 
     deferred.then(function(arg) {
-      root.get('selector')(root.get('element')).html(root.get('searchFieldView').render().el);
+      root.get('selector')(root.get('element')).html(root.get('searchView').render().el);
     });
   };
 

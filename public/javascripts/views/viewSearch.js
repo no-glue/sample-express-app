@@ -1,20 +1,18 @@
 var SearchView = View.extend({
-  tagName: 'form',
-  events: {
-    'keyup': 'keyup'
-  },
+  tagName: 'div',
   render: function() {
     // show search form
 
-    var template = $('#searchTemplate').html();
+    this.clear();
 
-    this.$el.html(template);
+    var searchFieldView = new SearchFieldView();
+
+    this.$el.append(searchFieldView.render().el);
+
+    var searchResultsShowView = new SearchResultsShowView();
+
+    this.$el.append(searchResultsShowView.render().el);
 
     return this;
-  },
-  keyup: function(e) {
-    // searches text
-
-    this.trigger('text:search', this.formJson(this.$el.serializeArray()));
   }
 });
