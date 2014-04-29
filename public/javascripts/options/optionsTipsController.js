@@ -9,7 +9,7 @@ var tipsControllerOptions = function(options) {
       tagCreateFormView: new TagCreateFormView(),
       searchView: new SearchView(),
       element: '#app',
-      elementSearchResults: '#searchResults'
+      elementSearchResultsShow: '#searchResultsShow'
     };
   }
 
