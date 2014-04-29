@@ -103,8 +103,7 @@ var TipsController = function() {
   root.searched = function(event) {
     // text searched
 
-    root.get('selector')(root.get('elementSearchResultsShow')).html(event.search);
-    console.log('searched>>>', root.filter(event.search));
+    root.get('selector')(root.get('elementSearchResultsShow')).html(root.get('tagTipsView').set({models: root.filter(event.search)}).render().el);
   };
 
   root.latestTip = function() {
