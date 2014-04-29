@@ -2,6 +2,8 @@ extends layout
 
 block content
   div#app
+  script(id="searchFieldTemplate", type="text/x-handlebars")
+    <input type="text" name="search" placeholder="look up something..." class="input rounded padding-16px" />
   script(id="latestTipContentTemplate", type="text/x-handlebars")
     {{content}}
   script(id="latestTipReportTemplate", type="text/x-handlebars")
@@ -12,8 +14,6 @@ block content
     <a href="#tags/{{tag}}" class="tagButton">{{tag}}</a>
   script(id="latestTipTimeTemplate", type="text/x-handlebars")
     {{date}}
-  script(id="searchTemplate", type="text/x-handlebars")
-    <input type="text" name="search" placeholder="look up something..." class="input rounded padding-16px" />
   script(id="tagCreateFormTemplate", type="text/x-handlebars")
       <label class="line margin-top-16px label">Content</label>
       <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>
