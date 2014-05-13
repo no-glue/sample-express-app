@@ -8,8 +8,6 @@ var LatestTipCommentsView = View.extend({
 
     this.$el.html(html);
 
-    this.$el.attr('data-id', this.model.attributes._id);
-
     return this;
   }
 });
