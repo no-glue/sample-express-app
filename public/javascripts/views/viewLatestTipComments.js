@@ -1,10 +1,10 @@
-var LatestTipSearchView = View.extend({
+var LatestTipCommentsView = View.extend({
   tagName: 'span',
   className: 'stripButton',
   render: function() {
-    // shows search button
+    // shows comments button
 
-    var html = $('#latestTipSearchTemplate').html();
+    var html = $('#latestTipCommentsTemplate').html();
 
     this.$el.html(html);
 

@@ -4,6 +4,8 @@ block content
   div#app
   script(id="searchFieldTemplate", type="text/x-handlebars")
     <input type="text" name="search" placeholder="look up something..." class="input rounded padding-16px" />
+  script(id="latestTipCommentsTemplate", type="text/x-handlebars")
+    <a href="#/tags/comments" class="commentsButton">comments</a>
   script(id="latestTipContentTemplate", type="text/x-handlebars")
     {{content}}
   script(id="latestTipReportTemplate", type="text/x-handlebars")
