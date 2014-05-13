@@ -4,7 +4,11 @@ var LatestTipCommentsView = View.extend({
   render: function() {
     // shows comments button
 
-    var html = $('#latestTipCommentsTemplate').html();
+    var template = $('#latestTipCommentsTemplate').html();
+
+    var compiled = Handlebars.compile(template);
+
+    var html = compiled(this.model.attributes);
 
     this.$el.html(html);
 

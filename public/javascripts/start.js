@@ -7,7 +7,8 @@
     indexRoute: 'tipsController',
     createRoute: 'tipsController',
     searchRoute: 'tipsController',
-    tagRoute: 'tipsController'
+    tagRoute: 'tipsController',
+    commentsRoute: 'commentsController'
   },
   controllers: {
     tipsController: new TipsController()
