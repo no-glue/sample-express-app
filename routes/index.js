@@ -25,7 +25,7 @@ var Tips = function() {
 
   root.all = function(req, res) {
     // gets all tips
-    root.getDatabase().tips.find().limit(16384).sort({_id: 0}, function(err, tips) {
+    root.getDatabase().tips.find().limit(16384).sort({_id: -1}, function(err, tips) {
       if(err) return;
 
       res.json(tips);
