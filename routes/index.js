@@ -6,16 +6,16 @@
 var Tips = function() {
   var root = this;
 
-  root.setDatabase = function(database) {
-    // sets database to use
-    root.database = database;
+  root.set = function(options) {
+    // set options
+    for(var key in options)root[key] = options[key];
 
     return root;
   };
 
-  root.getDatabase = function() {
-    // gets database to use
-    return root.database;
+  root.get = function(key) {
+    // get key
+    return root[key];
   };
 
   root.index = function(req, res) {
@@ -25,7 +25,7 @@ var Tips = function() {
 
   root.all = function(req, res) {
     // gets all tips
-    root.getDatabase().tips.find().limit(16384).sort({_id: -1}, function(err, tips) {
+    root.get('database')[root.get('collection')].find().limit(16384).sort({_id: -1}, function(err, tips) {
       if(err) return;
 
       res.json(tips);
@@ -34,11 +34,11 @@ var Tips = function() {
 
   root.tip = function(req, res) {
     // gets a tip according to id
-    var db = root.getDatabase();
+    var db = root.get('database');
 
     var id = db.ObjectId(req.params.id);
 
-    db.tips.findOne({_id: id}, function(err, tip) {
+    db[root.get('collection')].findOne({_id: id}, function(err, tip) {
       if(err) return;
 
       res.json(tip);
@@ -49,7 +49,7 @@ var Tips = function() {
     // gets tips according to tag
     var tag = req.params.name;
 
-    root.getDatabase().tips.find({tag: tag}, function(err, tips) {
+    root.get('database')[root.get('collection')].find({tag: tag}, function(err, tips) {
       if(err) return;
 
       res.json(tips);
@@ -60,7 +60,7 @@ var Tips = function() {
     // gets tips according to name
     var name = req.params.name;
 
-    root.getDatabase().tips.find({name: name}, function(err, tips) {
+    root.get('database')[root.get('collection')].find({name: name}, function(err, tips) {
       if(err) return;
 
       res.json(tips);
@@ -69,7 +69,7 @@ var Tips = function() {
 
   root.create = function(req, res) {
     // adds a tip
-    root.getDatabase().tips.save(req.body, function(err, saved) {
+    root.get('database')[root.get('collection')].save(req.body, function(err, saved) {
       res.json(req.body);
     });
   }
@@ -77,13 +77,13 @@ var Tips = function() {
   root.update = function(req, res) {
     // updates tip
 
-    var db = root.getDatabase();
+    var db = root.get('database');
 
     var id = db.ObjectId(req.body._id);
 
     delete req.body._id;
 
-    root.getDatabase().tips.update({_id: id}, {$set: req.body}, function(err, lastErrorObject) {
+    root.getDatabase()[root.get('collection')].update({_id: id}, {$set: req.body}, function(err, lastErrorObject) {
       req.body._id = id;
 
       res.json(req.body);        
@@ -92,6 +92,9 @@ var Tips = function() {
 };
 
 var tips = new Tips()
-  .setDatabase(require('../database'));
+  .set({
+    database: require('../database'),
+    collection: 'tips'
+  });
 
 exports.tips = tips;
