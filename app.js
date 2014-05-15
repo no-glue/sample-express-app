@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var users = require('./routes/users');
 var http = require('http');
 var path = require('path');
 var stylus = require('stylus');
@@ -50,7 +50,7 @@ app.post('/tips', routes.tips.create);
 
 app.put('/tips', routes.tips.update);
 
-app.get('/users', user.list);
+app.post('/users', users.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
