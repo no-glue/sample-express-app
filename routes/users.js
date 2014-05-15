@@ -6,6 +6,10 @@ var users = (function(extend) {
     });
   };
 
+  extend.comment = function(req, res) {
+
+  };
+
   return extend;
 })(require('./setup'));
 
