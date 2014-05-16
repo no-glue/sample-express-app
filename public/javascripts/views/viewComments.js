@@ -1,7 +1,10 @@
 var CommentsView = View.extend({
+  tagName: 'ul',
   render: function() {
-    this.$el.html('comments');
-    
+    var commentView = new CommentView();
+
+    this.$el.append(commentView.render().el);
+
     return this;
   }
 });
