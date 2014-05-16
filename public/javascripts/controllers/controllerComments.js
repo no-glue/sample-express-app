@@ -78,20 +78,18 @@ var CommentsController = function() {
   root.comments = function(postId) {
     // show comments for post
 
-    // var models = root.get('collection').where({postId: postId});
+    var models = root.get('collection').where({postId: postId});
 
-    // if(models && models.length) {
-    //   root.get('selector')(root.get('element')).html(root.get('commentsView').set({models: models}).render().el);
-    // } else {
-    //   var deferred = root.fetch();
+    if(models && models.length) {
+      root.get('selector')(root.get('element')).html(root.get('commentsView').set({models: models}).render().el);
+    } else {
+      var deferred = root.fetch();
 
-    //   deferred.then(function(arg) {
-    //     var models = root.get('collection').where({postId: postId});
+      deferred.then(function(arg) {
+        var models = root.get('collection').where({postId: postId});
 
-    //     root.get('selector')(root.get('element')).html(root.get('commentsView').set({models: models}).render().el);
-    //   }); 
-    // }
-
-    console.log('comments>>>', postId);
+        root.get('selector')(root.get('element')).html(root.get('commentsView').set({models: models}).render().el);
+      }); 
+    }
   };
 };

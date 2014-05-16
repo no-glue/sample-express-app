@@ -50,6 +50,8 @@ app.post('/tips', routes.tips.create);
 
 app.put('/tips', routes.tips.update);
 
+app.get('/comments', comments.all);
+
 app.post('/comments', comments.create);
 
 http.createServer(app).listen(app.get('port'), function(){
