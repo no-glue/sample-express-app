@@ -1,5 +1,6 @@
 var CommentView = View.extend({
-  tagName: 'li',
+  tagName: 'div',
+  className: 'line margin-top-64px code',
   render: function() {
     var html = $('#commentTemplate').html();
 

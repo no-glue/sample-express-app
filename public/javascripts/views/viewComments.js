@@ -1,5 +1,6 @@
 var CommentsView = View.extend({
-  tagName: 'ul',
+  tagName: 'div',
+  className: 'centre',
   render: function() {
     for(var i = 0, len = this.models.length; i < len; i++) {
       var commentView = new CommentView();
