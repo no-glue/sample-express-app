@@ -11,7 +11,7 @@ var users = (function(extend) {
   };
 
   return extend;
-})(require('./setup'));
+})(require('./factory').create('./setup'));
 
 module.exports = users.set({
   database: require('../database'),

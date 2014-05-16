@@ -71,7 +71,7 @@ var tips = (function(extend) {
   };
 
   return extend;
-})(require('./setup'));
+})(require('./factory').create('./setup'));
 
 exports.tips = tips.set({
   database: require('../database'),
