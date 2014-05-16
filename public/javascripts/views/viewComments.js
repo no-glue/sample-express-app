@@ -1,9 +1,11 @@
 var CommentsView = View.extend({
   tagName: 'ul',
   render: function() {
-    var commentView = new CommentView();
+    for(var i = 0, len = this.models.length; i < len; i++) {
+      var commentView = new CommentView();
 
-    this.$el.append(commentView.render().el);
+      this.$el.append(commentView.set({model: this.models[i]}).render().el);
+    }
 
     return this;
   }
