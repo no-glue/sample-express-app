@@ -13,6 +13,9 @@
   controllers: {
     tipsController: new TipsController()
       .set(_.extend(options(), tipsControllerOptions()))
+      .initialize(),
+    commentsController: new CommentsController()
+      .set(_.extend(options(), commentsControllerOptions()))
       .initialize()
   }
 });

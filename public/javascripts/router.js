@@ -22,7 +22,7 @@ var Router = Backbone.Router.extend({
   tag: function(tag) {
     this.controllers[this.urls.tagRoute].tag(tag);
   },
-  comments: function(id) {
-    console.log('comments>>>', id);
+  comments: function(postId) {
+    this.controllers[this.urls.commentsRoute].comments(postId);
   }
 });

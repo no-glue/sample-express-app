@@ -1,5 +1,5 @@
 var tipsControllerOptions = function(options) {
-  // place controller options
+  // tips controller options
 
   if(!options) {
     options = {

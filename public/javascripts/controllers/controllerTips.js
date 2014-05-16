@@ -139,7 +139,6 @@ var TipsController = function() {
 
   root.tag = function(tag) {
     // gets tips tagged with tag
-    // todo fetch only tips with tag
 
     var models = root.get('collection').where({tag: tag});
 

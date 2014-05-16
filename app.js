@@ -5,6 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
+var comments = require('./routes/comments');
 var http = require('http');
 var path = require('path');
 var stylus = require('stylus');
@@ -48,6 +49,8 @@ app.get('/tips/name/:name', routes.tips.name);
 app.post('/tips', routes.tips.create);
 
 app.put('/tips', routes.tips.update);
+
+app.post('/comments', comments.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
