@@ -75,8 +75,18 @@ var CommentsController = function() {
     panel.getEvents().bind(event, handler, object);
   };
 
+  root.create = function(postId) {
+    // create comment for tag
+
+    var deferred = root.fetch();
+
+    deferred.then(function(arg) {
+      root.get('selector')(root.get('element')).html(root.get('commentCreateFormView').render().el);
+    });
+  };
+
   root.comments = function(postId) {
-    // show comments for post
+    // show comments for tag
 
     var models = root.get('collection').where({postId: postId});
 

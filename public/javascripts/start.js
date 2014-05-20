@@ -8,6 +8,7 @@
     createRoute: 'tipsController',
     searchRoute: 'tipsController',
     tagRoute: 'tipsController',
+    commentsCreateRoute: 'commentsController',
     commentsRoute: 'commentsController'
   },
   controllers: {

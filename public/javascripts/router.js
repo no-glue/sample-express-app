@@ -7,6 +7,7 @@ var Router = Backbone.Router.extend({
     'home': 'latestTip',
     'tags/create': 'create',
     'tags/search': 'search',
+    'tags/comments/create/:id': 'commentsCreate',
     'tags/comments/:id': 'comments',
     'tags/:tag': 'tag'
   },
@@ -24,5 +25,8 @@ var Router = Backbone.Router.extend({
   },
   comments: function(postId) {
     this.controllers[this.urls.commentsRoute].comments(postId);
+  },
+  commentsCreate: function(postId) {
+    this.controllers[this.urls.commentsCreateRoute].create(postId);
   }
 });

@@ -5,6 +5,7 @@ var commentsControllerOptions = function(options) {
     options = {
       collection: new CommentsCollection(),
       commentsView: new CommentsView(),
+      commentCreateFormView: new CommentCreateFormView(),
       element: '#app',
     };
   }
