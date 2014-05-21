@@ -4,9 +4,7 @@ var CommentView = View.extend({
   render: function() {
     var html = $('#commentTemplate').html();
 
-    var compiled = Handlebars.compile(html);
-
-    this.$el.html(compiled(this.model.attributes));
+    this.$el.html(this.replace(html, this.markdown(this.model.attributes.content)));
 
     return this;
   }

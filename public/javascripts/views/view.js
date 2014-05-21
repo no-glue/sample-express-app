@@ -66,10 +66,14 @@ var View = Backbone.View.extend({
 
     return markdown.parse(str);
   },
-  replace: function(str, other) {
+  replace: function(str, other, pattern) {
     // replace string with other
 
-    return str.replace(/{{(.*?)}}/, other);
+    var regex = {};
+
+    regex = (pattern) ? new RegExp('{{' + pattern + '}}', 'g') : new RegExp('{{(.*?)}}', 'g');
+
+    return str.replace(regex, other);
   },
   composite: function(model, fields) {
     // adds composites to model
