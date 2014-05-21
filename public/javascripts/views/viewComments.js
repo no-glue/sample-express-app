@@ -2,16 +2,20 @@ var CommentsView = View.extend({
   tagName: 'div',
   className: 'centre',
   render: function() {
-    this.$el.html('');
-    
-    for(var i = 0, len = this.models.length; i < len; i++) {
+    // show comments
+
+    this.clear();
+
+    var sorted = this.sortCidReverse(this.models);
+
+    for(var i = 0, len = sorted.length; i < len; i++) {
       var commentView = new CommentView();
 
-      this.$el.append(commentView.set({model: this.models[i]}).render().el);
+      this.$el.append(commentView.set({model: sorted[i]}).render().el);
 
       var commentButtonStripView = new CommentButtonStripView();
 
-      this.$el.append(commentButtonStripView.set({model: this.models[i]}).render().el);
+      this.$el.append(commentButtonStripView.set({model: sorted[i]}).render().el);
     }
 
     return this;

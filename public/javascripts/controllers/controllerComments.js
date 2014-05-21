@@ -80,7 +80,12 @@ var CommentsController = function() {
   root.created = function(event) {
     // comment is created
 
-    console.log('created>>>', event);
+    root.get('collection').create(event, {
+      wait: true,
+      success: function(response) {
+        root.navigate('tags', ['comments', event.postId]);
+      }
+    });
   };
 
   root.create = function(postId) {
