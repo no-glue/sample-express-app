@@ -89,7 +89,7 @@ var CommentsController = function() {
     var deferred = root.fetch();
 
     deferred.then(function(arg) {
-      root.get('selector')(root.get('element')).html(root.get('commentCreateFormView').render().el);
+      root.get('selector')(root.get('element')).html(root.get('commentCreateFormView').set({postId: {postId: postId}}).render().el);
     });
   };
 

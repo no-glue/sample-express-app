@@ -7,7 +7,11 @@ var CommentCreateFormView = View.extend({
   render: function() {
     // show comment create form
 
-    this.$el.html($('#commentCreateFormTemplate').html());
+    var html = $('#commentCreateFormTemplate').html();
+
+    var compiled = Handlebars.compile(html);
+
+    this.$el.html(compiled(this.postId));
 
     return this;
   },

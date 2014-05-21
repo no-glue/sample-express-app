@@ -9,6 +9,7 @@ block content
   script(id="commentCreateFormTemplate" type="text/x-handlebars")
     <label class="line margin-top-16px label">Comment</label>
     <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>
+    <input type="hidden" name="postId" value="{{postId}}" />
     <input type="submit" value="Create" class="line margin-top-16px rounded submit" />
 
   script(id="searchFieldTemplate", type="text/x-handlebars")
