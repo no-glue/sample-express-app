@@ -5,6 +5,8 @@ var CommentsController = function() {
     // initialize things
     // as in controllerTips e.g.
 
+    root.react('comment:create', root.created);
+
     return root;
   };
 
@@ -73,6 +75,12 @@ var CommentsController = function() {
     if(!panel) panel = controlPanel;
 
     panel.getEvents().bind(event, handler, object);
+  };
+
+  root.created = function(event) {
+    // comment is created
+
+    console.log('created>>>', event);
   };
 
   root.create = function(postId) {

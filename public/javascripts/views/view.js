@@ -76,7 +76,7 @@ var View = Backbone.View.extend({
     return str.replace(regex, other);
   },
   composite: function(model, fields) {
-    // adds composites to model
+    // adds composites to model (e.g. concat all text fields)
 
     for(var key in fields) {
       var field = fields[key];

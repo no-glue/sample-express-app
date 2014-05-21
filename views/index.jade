@@ -7,7 +7,7 @@ block content
   script(id="commentButtonTemplate", type="text/x-handlebars")
     <a href="#tags/comments/create/{{postId}}" class="commentButton">comment</a>
   script(id="commentCreateFormTemplate" type="text/x-handlebars")
-    <label class="line margin-top-16px label">Content</label>
+    <label class="line margin-top-16px label">Comment</label>
     <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>
     <input type="submit" value="Create" class="line margin-top-16px rounded submit" />
 
@@ -26,7 +26,7 @@ block content
   script(id="latestTipTimeTemplate", type="text/x-handlebars")
     {{date}}
   script(id="tagCreateFormTemplate", type="text/x-handlebars")
-      <label class="line margin-top-16px label">Comment</label>
+      <label class="line margin-top-16px label">Content</label>
       <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>
       <label class="line margin-top-16px label">Tag</label>
       <input name="tag" type="text" pattern="^[a-zA-Z0-9-]+$" required title="Only one tag allowed"class="line margin-top-16px tag rounded input"/>

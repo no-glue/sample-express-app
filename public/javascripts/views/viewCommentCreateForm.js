@@ -15,5 +15,7 @@ var CommentCreateFormView = View.extend({
     // submit form to create comment
 
     e.preventDefault();
+
+    this.trigger('comment:create', this.formJson(this.$el.serializeArray()));
   }
 });
