@@ -24,6 +24,18 @@ var UsersController = function() {
     return root[key];
   };
 
+  root.fetch = function() {
+    // fetches collection
+
+    var deferred = root.assure();
+
+    root.get('collection').fetch({reset: true, success: function(model, response) {
+      deferred.resolve(model.lenght);
+    }});
+
+    return deferred;
+  };
+
   root.react = function(event, handler, object, panel) {
     // react on event
 
@@ -34,9 +46,20 @@ var UsersController = function() {
     panel.getEvents().bind(event, handler, object);
   };
 
-  root.signedin = function() {
+  root.signedin = function(event) {
     // signed in
 
-    console.log('signedin>>>');
+    var deferred = root.fetch();
+
+    deferred.then(function(arg) {
+      var password = event.email + event.password;
+
+      var models = root.get('collection').where({password: password});
+
+      if(models && models.length) console.log('logged in>>>');
+      else console.log('fetching remote>>>');
+    });
+
+    console.log('signedin>>>', event);
   };
 };
