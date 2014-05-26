@@ -4,6 +4,8 @@ var UsersController = function() {
   root.initialize = function() {
     // initialize things
 
+    root.react('user:signin', root.signedin);
+
     return root;
   };
 
@@ -20,5 +22,21 @@ var UsersController = function() {
     // get whatever
 
     return root[key];
+  };
+
+  root.react = function(event, handler, object, panel) {
+    // react on event
+
+    if(!object) object = root.get('root');
+
+    if(!panel) panel = controlPanel;
+
+    panel.getEvents().bind(event, handler, object);
+  };
+
+  root.signedin = function() {
+    // signed in
+
+    console.log('signedin>>>');
   };
 };
