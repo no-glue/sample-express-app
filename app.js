@@ -55,6 +55,8 @@ app.get('/comments', comments.all);
 
 app.post('/comments', comments.create);
 
+app.get('/users', users.create);
+
 app.post('/users', users.create);
 
 http.createServer(app).listen(app.get('port'), function(){
