@@ -17,6 +17,9 @@
       .initialize(),
     commentsController: new CommentsController()
       .set(_.extend(options(), commentsControllerOptions()))
+      .initialize(),
+    usersController: new UsersController()
+      .set(_extend(options(), usersControllerOptions()))
       .initialize()
   }
 });
