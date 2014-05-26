@@ -26,6 +26,10 @@ block content
     <a href="#tags/{{tag}}" class="tagButton">{{tag}}</a>
   script(id="latestTipTimeTemplate", type="text/x-handlebars")
     {{date}}
+  script(id="loginFormTemplate", type="text/x-handlebars")
+    <input type="text" name="email" />
+    <input type="password" name="password" />
+    <input type="submit" name="submit" value="Sign in" />
   script(id="tagCreateFormTemplate", type="text/x-handlebars")
       <label class="line margin-top-16px label">Content</label>
       <textarea name="content" pattern=".{128,}" required tile="Minimum is 128 characters" class="line margin-top-16px tip rounded input"></textarea>

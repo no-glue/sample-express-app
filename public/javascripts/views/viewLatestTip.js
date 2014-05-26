@@ -8,6 +8,10 @@ var LatestTipView = View.extend({
 
     var model = this.collection.shift();
 
+    var loginStripView = new LoginStripView();
+
+    this.$el.append(loginStripView.render().el);
+
     var latestTipContentView = new LatestTipContentView();
 
     this.$el.append(latestTipContentView.set({model: model}).render().el);
