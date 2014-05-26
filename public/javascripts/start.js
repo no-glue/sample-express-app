@@ -19,7 +19,7 @@
       .set(_.extend(options(), commentsControllerOptions()))
       .initialize(),
     usersController: new UsersController()
-      .set(_extend(options(), usersControllerOptions()))
+      .set(_.extend(options(), usersControllerOptions()))
       .initialize()
   }
 });

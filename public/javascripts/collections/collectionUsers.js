@@ -1,4 +1,4 @@
-var Users = Backbone.Collection.extend({
+var UsersCollection = Backbone.Collection.extend({
   model: User,
   url: '/users',
   reset: function(models, options) {
