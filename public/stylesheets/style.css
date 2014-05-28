@@ -1,16 +1,102 @@
-.line {
+body {
+  background-color: #774f38;
+  color: #fff;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+a {
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  padding: 16px 16px 16px 16px;
+  color: #fff;
+  font-weight: bolder;
+  font-size: 15px;
+  border-radius: 8px;
+  min-width: 64px;
+  text-align: center;
+}
+a.tagButton {
+  background-color: #e08e79;
+}
+a.reportButton {
+  background-color: #f1d4af;
+}
+a.searchButton {
+  background-color: #c5e0dc;
+}
+a.commentsButton {
+  background-color: #20e1a4;
+}
+a.commentButton {
+  background-color: #4ab912;
+}
+.margin-top-16px {
+  margin-top: 16px;
+}
+.margin-top-64px {
   margin-top: 64px;
+}
+.line {
+  display: block;
   text-align: left;
 }
 .centre {
   display: inline-block;
   width: 960px;
 }
+.rounded {
+  border-radius: 8px;
+}
+.tip {
+  width: 960px;
+  height: 720px;
+}
+.tag {
+  width: 240px;
+}
+.submit {
+  background-color: #e08e79;
+  border: none;
+  padding: 16px 16px 16px 16px;
+  color: #fff;
+  font-weight: bolder;
+  font-size: 15px;
+}
+.label {
+  font-size: 32px;
+}
+.input {
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.2);
+  background-color: #f1d4af;
+}
 #app {
   text-align: center;
 }
 .lineList {
   list-style-type: none;
-  display: inline;
-  margin-left: 16px;
+  display: inline-block;
+  margin: 16px 16px 0 0;
+  float: left;
+}
+.stripButton {
+  margin: 0 16px 0 0;
+}
+.code {
+  background-color: #ba23ed;
+  padding: 32px 32px 32px 32px;
+  border-radius: 8px;
+  font-weight: bolder;
+}
+.padding-16px {
+  padding: 16px;
+}
+.welcome,
+.email {
+  font-weight: bolder;
+}
+.email {
+  color: #e08e79;
+}
+.margin-right-8px {
+  margin-right: 8px;
 }
