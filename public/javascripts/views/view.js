@@ -93,5 +93,12 @@ var View = Backbone.View.extend({
     }
 
     return model;
+  },
+  userSignedin: function(store) {
+    // check if user signed in
+
+    if(!store) store = signedin;
+
+    return store().get().length;
   }
 });

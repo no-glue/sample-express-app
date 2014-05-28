@@ -56,8 +56,15 @@ var UsersController = function() {
 
       var models = root.get('collection').where({password: password});
 
-      if(models && models.length) console.log('logged in>>>');
-      else console.log('fetching remote>>>');
+      if(models && models.length) {
+        root.get('userSignedin').insert({user: models.pop()});
+
+        root.navigate('home');
+      }
+      else {
+        // todo check if user exists remote side
+        console.log('fetching remote>>>');
+      }
     });
 
     console.log('signedin>>>', event);

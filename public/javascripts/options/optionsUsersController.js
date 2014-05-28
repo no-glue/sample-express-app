@@ -4,6 +4,7 @@ var usersControllerOptions = function(options) {
   if(!options) {
     options = {
       collection: new UsersCollection(),
+      userSignedin: signedin,
       element: '#app'
     };
   };
