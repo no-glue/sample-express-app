@@ -96,6 +96,7 @@ var View = Backbone.View.extend({
   },
   userSignedin: function(store) {
     // check if user signed in
+    // todo this with cookies
 
     if(!store) store = signedin;
 
@@ -103,9 +104,10 @@ var View = Backbone.View.extend({
   },
   getUserSignedin: function(store) {
     // get signed in user
+    // todo do this with cookies
 
     if(!store) store = signedin;
 
-    return store().first();
+    return store().first().user.attributes;
   }
 });

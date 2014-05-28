@@ -8,7 +8,7 @@ var LoggedinStripView = View.extend({
 
     var compiled = Handlebars.compile(html);
 
-    this.$el.html((this.userSignedin()) ? compiled({email: 'fuckjews@hard.com'}) : '');
+    this.$el.html((this.userSignedin()) ? compiled(this.getUserSignedin()) : '');
 
     return this;
   }
