@@ -26,6 +26,8 @@ block content
     <a href="#tags/{{tag}}" class="tagButton">{{tag}}</a>
   script(id="latestTipTimeTemplate", type="text/x-handlebars")
     {{date}}
+  script(id="loggedinStripTemplate", type="text/x-handlebars")
+    | Welcome {{email}}
   script(id="loginFormTemplate", type="text/x-handlebars")
     <input type="text" name="email" class="input tag padding-16px rounded" placeholder="email" />
     <input type="password" name="password" class="input tag padding-16px rounded" placeholder="password" />

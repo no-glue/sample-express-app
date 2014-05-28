@@ -100,5 +100,12 @@ var View = Backbone.View.extend({
     if(!store) store = signedin;
 
     return store().get().length;
+  },
+  getUserSignedin: function(store) {
+    // get signed in user
+
+    if(!store) store = signedin;
+
+    return store().first();
   }
 });

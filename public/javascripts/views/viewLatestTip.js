@@ -12,6 +12,10 @@ var LatestTipView = View.extend({
 
     this.$el.append(loginStripView.render().el);
 
+    var loggedinStripView = new LoggedinStripView();
+
+    this.$el.append(loggedinStripView.render().el);
+
     var latestTipContentView = new LatestTipContentView();
 
     this.$el.append(latestTipContentView.set({model: model}).render().el);
