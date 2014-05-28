@@ -6,6 +6,10 @@ var CommentsView = View.extend({
 
     this.clear();
 
+    var loggedinStripView = new LoggedinStripView();
+
+    this.$el.append(loggedinStripView.render().el);
+
     var sorted = this.sortCidReverse(this.models);
 
     for(var i = 0, len = sorted.length; i < len; i++) {
