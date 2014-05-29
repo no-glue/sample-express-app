@@ -107,7 +107,8 @@ var View = Backbone.View.extend({
     // todo do this with cookies
 
     if(!store) store = signedin;
+    console.log('user>>>', store().first().user, store().first().user.attributes);
 
-    return store().first().user.attributes;
+    return store().first().user;
   }
 });

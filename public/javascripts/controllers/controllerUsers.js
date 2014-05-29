@@ -36,6 +36,20 @@ var UsersController = function() {
     return deferred;
   };
 
+  root.fetchUser = function(email) {
+    // fetch user according to email
+
+    var deferred = root.assure();
+
+    var userFetch = new UserFetch();
+
+    userFetch.set({email: email}).fetch({success: function(model, response) {
+      deferred.resolve(response.pop());
+    }});
+
+    return deferred;
+  };
+
   root.react = function(event, handler, object, panel) {
     // react on event
 
@@ -57,13 +71,18 @@ var UsersController = function() {
       var models = root.get('collection').where({password: password});
 
       if(models && models.length) {
-        root.get('userSignedin').insert({user: models.pop()});
+        root.get('userSignedin').insert({user: models.pop().toJSON()});
 
         root.navigate('home');
-      }
-      else {
+      } else {
         // todo check if user exists remote side
-        console.log('fetching remote>>>');
+        var anotherDeferred = root.fetchUser(event.email);
+
+        anotherDeferred.then(function(arg) {
+          root.get('userSignedin').insert({user: arg});
+
+          root.navigate('home');
+        });
       }
     });
 

@@ -1,10 +1,23 @@
 var users = (function(extend) {
   extend.all = function(req, res) {
     // get all users
-    extend.get('database')[extend.get('collection')].find().limit(16384).sort({_id: -1}, function(err, tips) {
+    extend.get('database')[extend.get('collection')].find().limit(1).sort({_id: -1}, function(err, users) {
+    // extend.get('database')[extend.get('collection')].find().limit(16384).sort({_id: -1}, function(err, users) {
+      console.log('all>>>', req.body);
       if(err) return;
 
-      res.json(tips);
+      res.json(users);
+    });
+  };
+
+  extend.single = function(req, res) {
+    // get single user according to email
+    var email = req.params.email;
+
+    extend.get('database')[extend.get('collection')].find({email: email}, function(err, users) {
+      if(err) return;
+
+      res.json(users);
     });
   };
 

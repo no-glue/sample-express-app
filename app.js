@@ -55,6 +55,8 @@ app.get('/comments', comments.all);
 
 app.post('/comments', comments.create);
 
+app.get('/users/single/:email', users.single);
+
 app.get('/users', users.all);
 
 app.post('/users', users.create);
