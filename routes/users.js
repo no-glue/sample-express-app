@@ -1,9 +1,7 @@
 var users = (function(extend) {
   extend.all = function(req, res) {
     // get all users
-    extend.get('database')[extend.get('collection')].find().limit(1).sort({_id: -1}, function(err, users) {
-    // extend.get('database')[extend.get('collection')].find().limit(16384).sort({_id: -1}, function(err, users) {
-      console.log('all>>>', req.body);
+    extend.get('database')[extend.get('collection')].find().limit(16384).sort({_id: -1}, function(err, users) {
       if(err) return;
 
       res.json(users);
