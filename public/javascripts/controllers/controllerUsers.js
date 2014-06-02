@@ -75,13 +75,23 @@ var UsersController = function() {
 
         root.navigate('home');
       } else {
-        // todo check if user exists remote side
         var anotherDeferred = root.fetchUser(event.email);
 
         anotherDeferred.then(function(arg) {
-          root.get('userSignedin').insert({user: arg});
+          if(arg) {
+            root.get('userSignedin').insert({user: arg});
 
-          root.navigate('home');
+            root.navigate('home');
+          } else {
+            root.get('collection').create(event, {
+              wait: true,
+              success: function(response) {
+                root.get('userSignedin').insert({user: response.toJSON()});
+
+                root.navigate('home')
+              }
+            });
+          }
         });
       }
     });

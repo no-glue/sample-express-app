@@ -23,8 +23,13 @@ var users = (function(extend) {
 
   extend.create = function(req, res) {
     // create user
-    extend.get('database')[extend.get('collection')].save(req.body, function(err, saved) {
-      res.json(req.body);
+    var save = {
+      email: req.body.email,
+      password: req.body.email + req.body.password
+    };
+
+    extend.get('database')[extend.get('collection')].save(save, function(err, saved) {
+      res.json(save);
     });
   };
 
