@@ -41,9 +41,7 @@ var UsersController = function() {
 
     var deferred = root.assure();
 
-    var userFetch = new UserFetch();
-
-    userFetch.set({email: email}).fetch({success: function(model, response) {
+    root.get('userFetch').set({email: email}).fetch({success: function(model, response) {
       deferred.resolve(response.pop());
     }});
 
