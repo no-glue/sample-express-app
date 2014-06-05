@@ -4,7 +4,7 @@ var usersControllerOptions = function(options) {
   if(!options) {
     options = {
       collection: new UsersCollection(),
-      userSignedin: signedin,
+      cookies: CookieJS,
       element: '#app'
     };
   };

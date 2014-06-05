@@ -60,6 +60,17 @@ var UsersController = function() {
     panel.getEvents().bind(event, handler, object);
   };
 
+  root.cookie = function(name, val, expires, path) {
+    // create cookie
+
+    return {
+      name: name,
+      value: val,
+      expires: (expires) ? expires : 1,
+      path: (path) ? path : '/'
+    };
+  };
+
   root.signedin = function(event) {
     // signed in
 
@@ -71,7 +82,7 @@ var UsersController = function() {
       var models = root.get('collection').where({password: password});
 
       if(models && models.length) {
-        root.get('userSignedin').insert({user: models.pop().toJSON()});
+        root.get('cookies').set(root.cookie('user', JSON.stringify(models.pop().toJSON())));
 
         root.navigate('home');
       } else {
@@ -79,14 +90,14 @@ var UsersController = function() {
 
         anotherDeferred.then(function(arg) {
           if(arg) {
-            root.get('userSignedin').insert({user: arg});
+            root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
 
             root.navigate('home');
           } else {
             root.get('collection').create(event, {
               wait: true,
               success: function(response) {
-                root.get('userSignedin').insert({user: response.toJSON()});
+                root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
 
                 root.navigate('home')
               }

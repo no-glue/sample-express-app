@@ -98,17 +98,16 @@ var View = Backbone.View.extend({
     // check if user signed in
     // todo this with cookies
 
-    if(!store) store = signedin;
+    if(!store) store = CookieJS;
 
-    return store().get().length;
+    return store.get('user') != undefined;
   },
   getUserSignedin: function(store) {
     // get signed in user
     // todo do this with cookies
 
-    if(!store) store = signedin;
-    console.log('user>>>', store().first().user, store().first().user.attributes);
+    if(!store) store = CookieJS;
 
-    return store().first().user;
+    return JSON.parse(store.get('user'));
   }
 });

@@ -6,7 +6,7 @@ var LoginStripView = View.extend({
 
     var loginFormView = new LoginFormView();
 
-    this.$el.html((!this.userSignedin()) ? loginFormView.render().el : '');
+    this.$el.html((this.userSignedin()) ? '' : loginFormView.render().el);
 
     return this;
   }
