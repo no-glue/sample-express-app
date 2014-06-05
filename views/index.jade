@@ -28,7 +28,9 @@ block content
     {{date}}
   script(id="loggedinStripTemplate", type="text/x-handlebars")
     span(class="welcome margin-right-8px") Welcome
-    span(class="email") {{email}}
+    span(class="email margin-right-32px") {{email}}
+    span(class="stipButton")
+      <a href="#" class="tagButton">Sign out</a>
   script(id="loginFormTemplate", type="text/x-handlebars")
     <input type="text" name="email" class="input tag padding-16px rounded" placeholder="email" />
     <input type="password" name="password" class="input tag padding-16px rounded" placeholder="password" />

@@ -23,6 +23,11 @@ var options = function(options) {
         if(!navigator) navigator = Backbone.history;
 
         navigator.navigate(url, refresh);
+      },
+      clearFragment: function() {
+        // clear url
+
+        Backbone.history.fragment = null;
       } 
     }
   }

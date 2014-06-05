@@ -6,6 +6,8 @@ var UsersController = function() {
 
     root.react('user:signin', root.signedin);
 
+    root.react('user:signout', root.signedout);
+
     return root;
   };
 
@@ -82,6 +84,8 @@ var UsersController = function() {
       if(models && models.length) {
         root.get('cookies').set(root.cookie('user', JSON.stringify(models.pop().toJSON())));
 
+        root.clearFragment();
+
         root.navigate('home');
       } else {
         var anotherDeferred = root.fetchUser(event.email);
@@ -90,12 +94,16 @@ var UsersController = function() {
           if(arg) {
             root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
 
+            root.clearFragment();
+
             root.navigate('home');
           } else {
             root.get('collection').create(event, {
               wait: true,
               success: function(response) {
                 root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
+
+                root.clearFragment();
 
                 root.navigate('home')
               }
@@ -106,5 +114,18 @@ var UsersController = function() {
     });
 
     console.log('signedin>>>', event);
+  };
+
+  root.signedout = function() {
+    // user signedout
+
+    root.get('cookies').delete({
+      name: 'user',
+      path: '/'
+    });
+
+    root.clearFragment();
+
+    root.navigate('home');
   };
 };
