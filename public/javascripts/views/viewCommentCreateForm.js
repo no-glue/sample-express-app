@@ -11,6 +11,8 @@ var CommentCreateFormView = View.extend({
 
     var compiled = Handlebars.compile(html);
 
+    this.postId.userId = this.getUserSignedin()._id;
+
     this.$el.html(compiled(this.postId));
 
     return this;
