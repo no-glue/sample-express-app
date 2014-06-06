@@ -5,7 +5,6 @@ var usersControllerOptions = function(options) {
     options = {
       collection: new UsersCollection(),
       userFetch: new UserFetch(),
-      cookies: CookieJS,
       element: '#app'
     };
   };

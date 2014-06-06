@@ -90,12 +90,13 @@ var CommentsController = function() {
 
   root.create = function(postId) {
     // create comment for tag
+    if(root.get('cookies').get('user') != undefined) {
+      var deferred = root.fetch();
 
-    var deferred = root.fetch();
-
-    deferred.then(function(arg) {
-      root.get('selector')(root.get('element')).html(root.get('commentCreateFormView').set({postId: {postId: postId}}).render().el);
-    });
+      deferred.then(function(arg) {
+        root.get('selector')(root.get('element')).html(root.get('commentCreateFormView').set({postId: {postId: postId}}).render().el);
+      });
+    } else root.clearAndNavigate('home');
   };
 
   root.comments = function(postId) {

@@ -28,7 +28,15 @@ var options = function(options) {
         // clear url
 
         Backbone.history.fragment = null;
-      } 
+      },
+      clearAndNavigate: function(url, params, sep, refresh, navigator) {
+        // clear and navigate
+                
+        this.clearFragment();
+
+        this.navigate(url, params, sep, refresh, navigator);
+      },
+      cookies: CookieJS 
     }
   }
 
