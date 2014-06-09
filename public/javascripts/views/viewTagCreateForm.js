@@ -7,7 +7,9 @@ var TagCreateFormView = View.extend({
 
     this.clear();
 
-    this.$el.html($('#tagCreateFormTemplate').html());
+    var compiled = Handlebars.compile($('#tagCreateFormTemplate').html());
+
+    this.$el.html(compiled(this.getUserSignedin()));
 
     return this;
   },

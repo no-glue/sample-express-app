@@ -77,34 +77,24 @@ var UsersController = function() {
     var deferred = root.fetch();
 
     deferred.then(function(arg) {
-      var password = event.email + event.password;
+      var anotherDeferred = root.fetchUser(event.email);
 
-      var models = root.get('collection').where({password: password});
+      anotherDeferred.then(function(arg) {
+        if(arg) {
+          root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
 
-      if(models && models.length) {
-        root.get('cookies').set(root.cookie('user', JSON.stringify(models.pop().toJSON())));
+          root.clearAndNavigate('home');
+        } else {
+          root.get('collection').create(event, {
+            wait: true,
+            success: function(response) {
+              root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
 
-        root.clearAndNavigate('home');
-      } else {
-        var anotherDeferred = root.fetchUser(event.email);
-
-        anotherDeferred.then(function(arg) {
-          if(arg) {
-            root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
-
-            root.clearAndNavigate('home');
-          } else {
-            root.get('collection').create(event, {
-              wait: true,
-              success: function(response) {
-                root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
-
-                root.clearAndNavigate('home');
-              }
-            });
-          }
-        });
-      }
+              root.clearAndNavigate('home');
+            }
+          });
+        }
+      });
     });
   };
 
