@@ -63,7 +63,7 @@ var tips = (function(extend) {
 
     delete req.body._id;
 
-    extend.getDatabase()[extend.get('collection')].update({_id: id}, {$set: req.body}, function(err, lastErrorObject) {
+    extend.get('database')[extend.get('collection')].update({_id: id}, {$set: req.body}, function(err, lastErrorObject) {
       req.body._id = id;
 
       res.json(req.body);        
