@@ -84,9 +84,7 @@ var UsersController = function() {
       if(models && models.length) {
         root.get('cookies').set(root.cookie('user', JSON.stringify(models.pop().toJSON())));
 
-        root.clearFragment();
-
-        root.navigate('home');
+        root.clearAndNavigate('home');
       } else {
         var anotherDeferred = root.fetchUser(event.email);
 
@@ -94,26 +92,20 @@ var UsersController = function() {
           if(arg) {
             root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
 
-            root.clearFragment();
-
-            root.navigate('home');
+            root.clearAndNavigate('home');
           } else {
             root.get('collection').create(event, {
               wait: true,
               success: function(response) {
                 root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
 
-                root.clearFragment();
-
-                root.navigate('home')
+                root.clearAndNavigate('home');
               }
             });
           }
         });
       }
     });
-
-    console.log('signedin>>>', event);
   };
 
   root.signedout = function() {

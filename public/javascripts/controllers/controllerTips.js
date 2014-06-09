@@ -120,11 +120,13 @@ var TipsController = function() {
   root.create = function() {
     // shows page to create tip
 
-    var deferred = root.fetch();
+    if(root.get('cookies').get('user') != undefined) {
+      var deferred = root.fetch();
 
-    deferred.then(function(arg) {
-      root.get('selector')(root.get('element')).html(root.get('tagCreateFormView').render().el);
-    });
+      deferred.then(function(arg) {
+        root.get('selector')(root.get('element')).html(root.get('tagCreateFormView').render().el);
+      });
+    } else root.clearAndNavigate('home');
   };
 
   root.search = function() {
