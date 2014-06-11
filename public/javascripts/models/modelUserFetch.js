@@ -1,6 +1,6 @@
 var UserFetch = Backbone.Model.extend({
   url: function() {
-    return '/users/single/' + this.email;
+    return '/users/single/' + this.email + '/' + this.password;
   },
   set: function(options) {
     for(var key in options) this[key] = options[key];

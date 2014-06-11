@@ -38,12 +38,12 @@ var UsersController = function() {
     return deferred;
   };
 
-  root.fetchUser = function(email) {
+  root.fetchUser = function(email, password) {
     // fetch user according to email
 
     var deferred = root.assure();
 
-    root.get('userFetch').set({email: email}).fetch({success: function(model, response) {
+    root.get('userFetch').set({email: email, password: password}).fetch({success: function(model, response) {
       deferred.resolve(response.pop());
     }});
 
@@ -74,27 +74,23 @@ var UsersController = function() {
   root.signedin = function(event) {
     // signed in
 
-    var deferred = root.fetch();
+    var anotherDeferred = root.fetchUser(event.email, event.password);
 
-    deferred.then(function(arg) {
-      var anotherDeferred = root.fetchUser(event.email);
+    anotherDeferred.then(function(arg) {
+      if(arg) {
+        root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
 
-      anotherDeferred.then(function(arg) {
-        if(arg) {
-          root.get('cookies').set(root.cookie('user', JSON.stringify(arg)));
+        root.clearAndNavigate('home');
+      } else {
+        root.get('collection').create(event, {
+          wait: true,
+          success: function(response) {
+            root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
 
-          root.clearAndNavigate('home');
-        } else {
-          root.get('collection').create(event, {
-            wait: true,
-            success: function(response) {
-              root.get('cookies').set(root.cookie('user', JSON.stringify(response.toJSON())));
-
-              root.clearAndNavigate('home');
-            }
-          });
-        }
-      });
+            root.clearAndNavigate('home');
+          }
+        });
+      }
     });
   };
 

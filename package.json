@@ -14,7 +14,8 @@
     "nib": "~1.0.2",
     "gulp": "~3.6.1",
     "gulp-uglify": "~0.2.1",
-    "gulp-concat": "~2.2.0"
+    "gulp-concat": "~2.2.0",
+    "mcrypt": "0.0.7"
   },
   "main": "app.js",
   "engines": {

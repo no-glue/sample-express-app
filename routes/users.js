@@ -10,9 +10,12 @@ var users = (function(extend) {
 
   extend.single = function(req, res) {
     // get single user according to email
-    var email = req.params.email;
+    var find = {
+      email: req.params.email,
+      password: extend.encrypt(req.params.email, req.params.password)
+    };
 
-    extend.get('database')[extend.get('collection')].find({email: email}, function(err, users) {
+    extend.get('database')[extend.get('collection')].find(find, function(err, users) {
       if(err) return;
 
       res.json(users);
@@ -23,7 +26,7 @@ var users = (function(extend) {
     // create user
     var save = {
       email: req.body.email,
-      password: req.body.email + req.body.password
+      password: extend.encrypt(req.body.email, req.body.password)
     };
 
     extend.get('database')[extend.get('collection')].save(save, function(err, saved) {
