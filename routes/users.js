@@ -34,6 +34,25 @@ var users = (function(extend) {
     });
   };
 
+  extend.id = function(req, res, next) {
+    // check for user id in request
+    if(req.body.userId == undefined) {
+      res.json([]);
+
+      res.end();
+    } else {
+      extend.get('database')[extend.get('collection')].find({_id: extend.get('database').ObjectId(req.body.userId)}).count(function(err, count) {
+        if(!count) {
+          res.json([]);
+
+          res.end();
+        }
+
+        next();
+      });
+    }
+  };
+
   return extend;
 })(require('./factory').create('./setup'));
 

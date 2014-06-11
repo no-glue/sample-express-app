@@ -47,13 +47,13 @@ app.get('/tips/tag/:name', routes.tips.tag);
 
 app.get('/tips/name/:name', routes.tips.name);
 
-app.post('/tips', routes.tips.create);
+app.post('/tips', users.id, routes.tips.create);
 
 app.put('/tips', routes.tips.update);
 
 app.get('/comments', comments.all);
 
-app.post('/comments', comments.create);
+app.post('/comments', users.id, comments.create);
 
 app.get('/users/single/:email/:password', users.single);
 
