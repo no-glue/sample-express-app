@@ -47,11 +47,15 @@ app.get('/tips/tag/:name', routes.tips.tag);
 
 app.get('/tips/name/:name', routes.tips.name);
 
+app.post('/tips', users.objectId);
+
 app.post('/tips', users.id, routes.tips.create);
 
 app.put('/tips', routes.tips.update);
 
 app.get('/comments', comments.all);
+
+app.post('/comments', users.objectId);
 
 app.post('/comments', users.id, comments.create);
 

@@ -34,6 +34,13 @@ var users = (function(extend) {
     });
   };
 
+  extend.objectId = function(req, res, next) {
+    // transform userId to object
+    req.body.userId = extend.get('database').ObjectId(req.body.userId);
+
+    next();
+  };
+
   extend.id = function(req, res, next) {
     // check for user id in request
     if(req.body.userId == undefined) {
@@ -41,7 +48,7 @@ var users = (function(extend) {
 
       res.end();
     } else {
-      extend.get('database')[extend.get('collection')].find({_id: extend.get('database').ObjectId(req.body.userId)}).count(function(err, count) {
+      extend.get('database')[extend.get('collection')].find({_id: req.body.userId}).count(function(err, count) {
         if(!count) {
           res.json([]);
 
