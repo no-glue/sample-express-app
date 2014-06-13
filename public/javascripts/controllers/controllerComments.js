@@ -112,7 +112,8 @@ var CommentsController = function() {
       deferred.then(function(arg) {
         var models = root.get('collection').where({postId: postId});
 
-        root.get('selector')(root.get('element')).html(root.get('commentsView').set({models: models}).render().el);
+        if(models && models.lenght) root.get('selector')(root.get('element')).html(root.get('commentsView').set({models: models}).render().el);
+        else root.create(postId);
       }); 
     }
   };
