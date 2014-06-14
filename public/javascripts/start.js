@@ -12,14 +12,8 @@
     commentsRoute: 'commentsController'
   },
   controllers: {
-    tipsController: new TipsController()
-      .set(_.extend(options(), tipsControllerOptions()))
-      .initialize(),
-    commentsController: new CommentsController()
-      .set(_.extend(options(), commentsControllerOptions()))
-      .initialize(),
-    usersController: new UsersController()
-      .set(_.extend(options(), usersControllerOptions()))
-      .initialize()
+    tipsController: extendControllerTips.initialize(),
+    commentsController: extendControllerComments.initialize(),
+    usersController: extendControllerUsers.initialize()
   }
 });
